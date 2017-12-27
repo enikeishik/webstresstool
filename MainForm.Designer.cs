@@ -61,6 +61,7 @@ namespace WebStressTool
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.textBoxResults = new System.Windows.Forms.TextBox();
             this.textBoxUrl = new System.Windows.Forms.TextBox();
             this.numericUpDownIterates = new System.Windows.Forms.NumericUpDown();
@@ -349,6 +350,7 @@ namespace WebStressTool
             this.ClientSize = new System.Drawing.Size(584, 262);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBoxResults);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(600, 300);
             this.Name = "MainForm";

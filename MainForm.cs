@@ -22,7 +22,7 @@ using System.Net;
 namespace WebStressTool
 {
     /// <summary>
-    /// Description of MainForm.
+    /// MainForm of application.
     /// </summary>
     public partial class MainForm : Form
     {
@@ -33,6 +33,32 @@ namespace WebStressTool
         protected int bufferLastSize;
         
         protected bool abort;
+        
+        protected readonly static string[] localIPs = null;
+        
+        static MainForm()
+        {
+            localIPs = new string[] {
+                "192.168", 
+                "10.", 
+                "172.16.", 
+                "172.17.", 
+                "172.18.", 
+                "172.19.", 
+                "172.20.", 
+                "172.21.", 
+                "172.22.", 
+                "172.23.", 
+                "172.24.", 
+                "172.25.", 
+                "172.26.", 
+                "172.27.", 
+                "172.28.", 
+                "172.29.", 
+                "172.30.", 
+                "172.31.", 
+            };
+        }
         
         public MainForm()
         {
@@ -194,7 +220,14 @@ namespace WebStressTool
             }
             
             bool ipIsLocal = false;
-            IPAddress[] ips = Dns.GetHostAddresses(txt.Text);
+            IPAddress[] ips;
+            try {
+                ips = Dns.GetHostAddresses(txt.Text);
+            } catch (Exception) {
+                MessageBox.Show("Host not resolved, correct it or enter another host", "Host not resolved", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Cancel = true;
+                return;
+            }
             foreach (IPAddress ip in ips) {
                 if (IPAddress.IsLoopback(ip)) {
                     ipIsLocal = true;
@@ -202,29 +235,14 @@ namespace WebStressTool
                 }
                 
                 string ipStr = ip.ToString();
-                if (
-                    0 == ipStr.IndexOf("192.168")
-                    || 0 == ipStr.IndexOf("10.")
-                    || 0 == ipStr.IndexOf("172.16.")
-                    || 0 == ipStr.IndexOf("172.17.")
-                    || 0 == ipStr.IndexOf("172.18.")
-                    || 0 == ipStr.IndexOf("172.19.")
-                    || 0 == ipStr.IndexOf("172.20.")
-                    || 0 == ipStr.IndexOf("172.21.")
-                    || 0 == ipStr.IndexOf("172.22.")
-                    || 0 == ipStr.IndexOf("172.23.")
-                    || 0 == ipStr.IndexOf("172.24.")
-                    || 0 == ipStr.IndexOf("172.25.")
-                    || 0 == ipStr.IndexOf("172.26.")
-                    || 0 == ipStr.IndexOf("172.27.")
-                    || 0 == ipStr.IndexOf("172.28.")
-                    || 0 == ipStr.IndexOf("172.29.")
-                    || 0 == ipStr.IndexOf("172.30.")
-                    || 0 == ipStr.IndexOf("172.31.")
-                ) {
-                    ipIsLocal = true;
-                    break;
+                foreach (string localIP in localIPs) {
+                    if (0 == ipStr.IndexOf(localIP)) {
+                        ipIsLocal = true;
+                        break;
+                    }
                 }
+                if (ipIsLocal)
+                    break;
             }
             
             if (!ipIsLocal) {
