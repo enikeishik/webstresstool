@@ -74,15 +74,21 @@ namespace WebStressTool
             
             try {
                 HttpWebResponse response = (HttpWebResponse) request.GetResponse();
-                System.Diagnostics.Debug.WriteLine("Response " + "[" + d.iterateNum + "|" + d.threadNum + "/" + d.threadsCount + "]: " + response.StatusCode);
+                DebugOutput("Response " + "[" + d.iterateNum + "|" + d.threadNum + "/" + d.threadsCount + "]: " + response.StatusCode);
                 response.Close();
                 if (null != onWorkResult)
                     onWorkResult(this, new WorkerResult(d, response, ""));
             } catch (Exception e) {
-                System.Diagnostics.Debug.WriteLine("Error " + "[" + d.iterateNum + "|" + d.threadNum + "/" + d.threadsCount + "]: " + e.Message);
+                DebugOutput("Error " + "[" + d.iterateNum + "|" + d.threadNum + "/" + d.threadsCount + "]: " + e.Message);
                 if (null != onWorkResult)
                     onWorkResult(this, new WorkerResult(d, null, e.Message));
             }
+        }
+        
+        [System.Diagnostics.Conditional("DEBUG")]
+        protected void DebugOutput(string data)
+        {
+            System.Diagnostics.Debug.WriteLine(data);
         }
         
         protected void AwaitRequests()
