@@ -39,6 +39,7 @@ namespace WebStressTool
         private System.Windows.Forms.ComboBox comboBoxUrl;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDownTimeout;
+        private System.Windows.Forms.NumericUpDown numericUpDownUrl;
         
         /// <summary>
         /// Disposes resources used by the form.
@@ -71,6 +72,7 @@ namespace WebStressTool
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numericUpDownUrl = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.numericUpDownTimeout = new System.Windows.Forms.NumericUpDown();
             this.comboBoxUrl = new System.Windows.Forms.ComboBox();
@@ -85,6 +87,7 @@ namespace WebStressTool
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThreadsMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThreadsInc)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUrl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeout)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,7 +101,7 @@ namespace WebStressTool
             this.textBoxResults.Name = "textBoxResults";
             this.textBoxResults.ReadOnly = true;
             this.textBoxResults.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxResults.Size = new System.Drawing.Size(378, 262);
+            this.textBoxResults.Size = new System.Drawing.Size(318, 262);
             this.textBoxResults.TabIndex = 0;
             this.textBoxResults.WordWrap = false;
             this.textBoxResults.TextChanged += new System.EventHandler(this.TextBoxResultsTextChanged);
@@ -136,7 +139,7 @@ namespace WebStressTool
             // 
             // numericUpDownThreadsMin
             // 
-            this.numericUpDownThreadsMin.Location = new System.Drawing.Point(74, 126);
+            this.numericUpDownThreadsMin.Location = new System.Drawing.Point(74, 137);
             this.numericUpDownThreadsMin.Maximum = new decimal(new int[] {
             999,
             0,
@@ -159,7 +162,7 @@ namespace WebStressTool
             // 
             // numericUpDownThreadsMax
             // 
-            this.numericUpDownThreadsMax.Location = new System.Drawing.Point(74, 152);
+            this.numericUpDownThreadsMax.Location = new System.Drawing.Point(74, 163);
             this.numericUpDownThreadsMax.Maximum = new decimal(new int[] {
             999,
             0,
@@ -182,7 +185,7 @@ namespace WebStressTool
             // 
             // numericUpDownThreadsInc
             // 
-            this.numericUpDownThreadsInc.Location = new System.Drawing.Point(74, 178);
+            this.numericUpDownThreadsInc.Location = new System.Drawing.Point(74, 189);
             this.numericUpDownThreadsInc.Minimum = new decimal(new int[] {
             1,
             0,
@@ -199,7 +202,7 @@ namespace WebStressTool
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(6, 233);
+            this.buttonStart.Location = new System.Drawing.Point(92, 233);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
             this.buttonStart.TabIndex = 5;
@@ -209,7 +212,7 @@ namespace WebStressTool
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(113, 233);
+            this.buttonStop.Location = new System.Drawing.Point(173, 233);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 6;
@@ -219,6 +222,7 @@ namespace WebStressTool
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numericUpDownUrl);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.numericUpDownTimeout);
             this.groupBox1.Controls.Add(this.comboBoxUrl);
@@ -236,13 +240,35 @@ namespace WebStressTool
             this.groupBox1.Controls.Add(this.numericUpDownIterates);
             this.groupBox1.Controls.Add(this.textBoxUrl);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox1.Location = new System.Drawing.Point(384, 0);
-            this.groupBox1.MinimumSize = new System.Drawing.Size(200, 0);
+            this.groupBox1.Location = new System.Drawing.Point(324, 0);
+            this.groupBox1.MinimumSize = new System.Drawing.Size(260, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 262);
+            this.groupBox1.Size = new System.Drawing.Size(260, 262);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Params";
+            // 
+            // numericUpDownUrl
+            // 
+            this.numericUpDownUrl.Location = new System.Drawing.Point(200, 19);
+            this.numericUpDownUrl.Maximum = new decimal(new int[] {
+            65000,
+            0,
+            0,
+            0});
+            this.numericUpDownUrl.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownUrl.Name = "numericUpDownUrl";
+            this.numericUpDownUrl.Size = new System.Drawing.Size(54, 20);
+            this.numericUpDownUrl.TabIndex = 16;
+            this.numericUpDownUrl.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            0});
             // 
             // label6
             // 
@@ -292,10 +318,11 @@ namespace WebStressTool
             this.comboBoxUrl.Size = new System.Drawing.Size(62, 21);
             this.comboBoxUrl.Sorted = true;
             this.comboBoxUrl.TabIndex = 13;
+            this.comboBoxUrl.TextChanged += new System.EventHandler(this.ComboBoxUrlTextChanged);
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(6, 204);
+            this.buttonClear.Location = new System.Drawing.Point(6, 233);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 12;
@@ -305,15 +332,15 @@ namespace WebStressTool
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(6, 100);
+            this.label5.Location = new System.Drawing.Point(6, 114);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(188, 23);
+            this.label5.Size = new System.Drawing.Size(188, 20);
             this.label5.TabIndex = 11;
             this.label5.Text = "Threads";
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(6, 178);
+            this.label4.Location = new System.Drawing.Point(6, 189);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 20);
             this.label4.TabIndex = 10;
@@ -321,7 +348,7 @@ namespace WebStressTool
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(6, 152);
+            this.label3.Location = new System.Drawing.Point(6, 163);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 20);
             this.label3.TabIndex = 9;
@@ -329,7 +356,7 @@ namespace WebStressTool
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(6, 126);
+            this.label2.Location = new System.Drawing.Point(6, 137);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 20);
             this.label2.TabIndex = 8;
@@ -364,6 +391,7 @@ namespace WebStressTool
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThreadsInc)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUrl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeout)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

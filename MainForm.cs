@@ -80,7 +80,7 @@ namespace WebStressTool
             bufferLastSize = buffer.Count;
             
             //TODO: combine and check url
-            string url = comboBoxUrl.Text + "://" + textBoxUrl.Text;
+            string url = comboBoxUrl.Text + "://" + textBoxUrl.Text + ":" + numericUpDownUrl.Value;
             int timeout = (int) (1000 * numericUpDownTimeout.Value);
             worker = new Worker(url, timeout);
             worker.onWorkResult += StoreResult;
@@ -249,6 +249,15 @@ namespace WebStressTool
                 txt.Text = "localhost";
                 e.Cancel = true;
             }
+        }
+        
+        void ComboBoxUrlTextChanged(object sender, EventArgs e)
+        {
+            ComboBox cbx = (ComboBox) sender;
+            if ("http" == cbx.Text)
+                numericUpDownUrl.Value = 80;
+            else if ("https" == cbx.Text)
+                numericUpDownUrl.Value = 443;
         }
     }
 }
