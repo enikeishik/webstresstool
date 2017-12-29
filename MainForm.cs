@@ -36,6 +36,14 @@ namespace WebStressTool
         
         protected readonly static string[] localIPs = null;
         
+        protected string lastUrl = "";
+        
+        protected int requestsTotal = 0;
+        
+        protected int requestsOk = 0;
+        
+        protected readonly string formTitle = "";
+        
         static MainForm()
         {
             localIPs = new string[] {
@@ -70,6 +78,7 @@ namespace WebStressTool
             //
             // TODO: Add constructor code after the InitializeComponent() call.
             //
+            formTitle = this.Text;
             comboBoxUrl.SelectedItem = comboBoxUrl.Items[0];
         }
         
@@ -81,7 +90,12 @@ namespace WebStressTool
             
             //TODO: combine and check url
             string url = comboBoxUrl.Text + "://" + textBoxUrl.Text + ":" + numericUpDownUrl.Value;
+            if (url != lastUrl) {
+                requestsTotal = 0;
+                requestsOk = 0;
+            }
             int timeout = (int) (1000 * numericUpDownTimeout.Value);
+            
             worker = new Worker(url, timeout);
             worker.onWorkResult += StoreResult;
             
@@ -125,6 +139,7 @@ namespace WebStressTool
         protected void StoreResult(Worker sender, WorkerResult result)
         {
             string label, data;
+            requestsTotal++;
             if (null != result.response) {
                 label = 
                     "Response " +
@@ -132,6 +147,8 @@ namespace WebStressTool
                     result.data.threadNum + "/" + result.data.threadsCount + 
                     "]: ";
                 data = result.response.StatusCode.ToString();
+                if (result.response.StatusCode == HttpStatusCode.OK)
+                    requestsOk++;
             } else {
                 label = 
                     "Error " + 
@@ -146,11 +163,43 @@ namespace WebStressTool
         protected void DisplayResult()
         {
             if (bufferLastSize != buffer.Count) {
+                this.Text = formTitle + 
+                    " - requests/OK " + requestsTotal + 
+                    "/" + requestsOk + " (" + Math.Round((double) requestsOk / requestsTotal * 100) + "%)";
                 for (int i = bufferLastSize; i < buffer.Count; i++)
                     textBoxResults.Text += buffer[i] + Environment.NewLine;
                 bufferLastSize = buffer.Count;
                 textBoxResults.Refresh();
             }
+        }
+        
+        protected bool HostIsLocal(string host)
+        {
+#if DEBUG
+            return true;
+#endif
+#if !DEBUG
+            IPAddress[] ips;
+            try {
+                ips = Dns.GetHostAddresses(host);
+            } catch (Exception) {
+                MessageBox.Show("Host not resolved, correct it or enter another host", "Host not resolved", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            
+            foreach (IPAddress ip in ips) {
+                if (IPAddress.IsLoopback(ip))
+                    return true;
+                
+                string ipStr = ip.ToString();
+                foreach (string localIP in localIPs) {
+                    if (0 == ipStr.IndexOf(localIP))
+                        return true;
+                }
+            }
+            
+            return false;
+#endif
         }
         
         void MainFormKeyPress(object sender, KeyPressEventArgs e)
@@ -214,38 +263,7 @@ namespace WebStressTool
         {
             TextBox txt = (TextBox) sender;
             
-            if (txt.Text == "") {
-                txt.Text = "localhost";
-                e.Cancel = true;
-            }
-            
-            bool ipIsLocal = false;
-            IPAddress[] ips;
-            try {
-                ips = Dns.GetHostAddresses(txt.Text);
-            } catch (Exception) {
-                MessageBox.Show("Host not resolved, correct it or enter another host", "Host not resolved", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Cancel = true;
-                return;
-            }
-            foreach (IPAddress ip in ips) {
-                if (IPAddress.IsLoopback(ip)) {
-                    ipIsLocal = true;
-                    break;
-                }
-                
-                string ipStr = ip.ToString();
-                foreach (string localIP in localIPs) {
-                    if (0 == ipStr.IndexOf(localIP)) {
-                        ipIsLocal = true;
-                        break;
-                    }
-                }
-                if (ipIsLocal)
-                    break;
-            }
-            
-            if (!ipIsLocal) {
+            if (txt.Text == "" || !HostIsLocal(txt.Text)) {
                 txt.Text = "localhost";
                 e.Cancel = true;
             }
