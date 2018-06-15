@@ -49,39 +49,59 @@ namespace WebStressTool
         
         public void DoWork(int iterateNum, int threadsCount)
         {
+            System.Net.ServicePointManager.DefaultConnectionLimit = threadsCount;
             threads = new Thread[threadsCount];
             for (int i = 0; i < threadsCount; i++) {
                 threads[i] = new Thread(ThreadProc);
                 threads[i].Start(new WorkerData(iterateNum, i + 1, threadsCount));
+                Thread.Sleep(0);
             }
             Thread thAwait = new Thread(AwaitRequests);
             thAwait.Start();
+            Thread.Sleep(0);
         }
         
         public void Abort()
         {
-            foreach (Thread t in threads)
+            foreach (Thread t in threads) {
                 t.Abort();
+                Thread.Sleep(0);
+            }
         }
         
         protected void ThreadProc(object data)
         {
             WorkerData d = (WorkerData) data;
-            WebRequest request = WebRequest.Create(url);
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
             request.Timeout = requestTimeout;
+            request.KeepAlive = false;
+            request.ProtocolVersion = HttpVersion.Version10;
             
-            HttpWebRequest wr = (HttpWebRequest) request;
-            
+            HttpWebResponse response = null;
             try {
-                HttpWebResponse response = (HttpWebResponse) request.GetResponse();
-                DebugOutput("Response " + "[" + d.iterateNum + "|" + d.threadNum + "/" + d.threadsCount + "]: " + response.StatusCode);
-                response.Close();
+                //todo: try to use request.GetResponseAsync() C# 5
+                response = (HttpWebResponse) request.GetResponse();
+                DebugOutput(
+                    "(" + Thread.CurrentThread.ManagedThreadId + ")" + 
+                    " Response " + 
+                    "[" + d.iterateNum + "|" + d.threadNum + "/" + d.threadsCount + "]: " + 
+                    response.StatusCode
+                );
                 if (null != onWorkResult)
                     onWorkResult(this, new WorkerResult(d, response, ""));
             } catch (Exception e) {
-                DebugOutput("Error " + "[" + d.iterateNum + "|" + d.threadNum + "/" + d.threadsCount + "]: " + e.Message);
+                DebugOutput(
+                    "(" + Thread.CurrentThread.ManagedThreadId + ")" + 
+                    " Error " + 
+                    "[" + d.iterateNum + "|" + d.threadNum + "/" + d.threadsCount + "]: " + 
+                    e.Message
+                );
                 if (null != onWorkResult)
                     onWorkResult(this, new WorkerResult(d, null, e.Message));
+            } finally {
+                if (null != response) {
+                    response.Close();
+                }
             }
         }
         
