@@ -111,7 +111,7 @@ namespace WebStressTool
             this.textBoxUrl.Location = new System.Drawing.Point(74, 19);
             this.textBoxUrl.Name = "textBoxUrl";
             this.textBoxUrl.Size = new System.Drawing.Size(120, 20);
-            this.textBoxUrl.TabIndex = 0;
+            this.textBoxUrl.TabIndex = 3;
             this.textBoxUrl.Text = "localhost";
             this.textBoxUrl.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxUrlValidating);
             // 
@@ -130,7 +130,7 @@ namespace WebStressTool
             0});
             this.numericUpDownIterates.Name = "numericUpDownIterates";
             this.numericUpDownIterates.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownIterates.TabIndex = 1;
+            this.numericUpDownIterates.TabIndex = 8;
             this.numericUpDownIterates.Value = new decimal(new int[] {
             10,
             0,
@@ -152,7 +152,7 @@ namespace WebStressTool
             0});
             this.numericUpDownThreadsMin.Name = "numericUpDownThreadsMin";
             this.numericUpDownThreadsMin.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownThreadsMin.TabIndex = 2;
+            this.numericUpDownThreadsMin.TabIndex = 11;
             this.numericUpDownThreadsMin.Value = new decimal(new int[] {
             1,
             0,
@@ -175,7 +175,7 @@ namespace WebStressTool
             0});
             this.numericUpDownThreadsMax.Name = "numericUpDownThreadsMax";
             this.numericUpDownThreadsMax.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownThreadsMax.TabIndex = 3;
+            this.numericUpDownThreadsMax.TabIndex = 13;
             this.numericUpDownThreadsMax.Value = new decimal(new int[] {
             10,
             0,
@@ -193,7 +193,7 @@ namespace WebStressTool
             0});
             this.numericUpDownThreadsInc.Name = "numericUpDownThreadsInc";
             this.numericUpDownThreadsInc.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownThreadsInc.TabIndex = 4;
+            this.numericUpDownThreadsInc.TabIndex = 15;
             this.numericUpDownThreadsInc.Value = new decimal(new int[] {
             1,
             0,
@@ -205,7 +205,7 @@ namespace WebStressTool
             this.buttonStart.Location = new System.Drawing.Point(92, 233);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
-            this.buttonStart.TabIndex = 5;
+            this.buttonStart.TabIndex = 17;
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.ButtonStartClick);
@@ -215,7 +215,7 @@ namespace WebStressTool
             this.buttonStop.Location = new System.Drawing.Point(173, 233);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
-            this.buttonStop.TabIndex = 6;
+            this.buttonStop.TabIndex = 18;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.ButtonStopClick);
@@ -263,7 +263,7 @@ namespace WebStressTool
             0});
             this.numericUpDownUrl.Name = "numericUpDownUrl";
             this.numericUpDownUrl.Size = new System.Drawing.Size(54, 20);
-            this.numericUpDownUrl.TabIndex = 16;
+            this.numericUpDownUrl.TabIndex = 4;
             this.numericUpDownUrl.Value = new decimal(new int[] {
             80,
             0,
@@ -275,7 +275,7 @@ namespace WebStressTool
             this.label6.Location = new System.Drawing.Point(6, 45);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(62, 20);
-            this.label6.TabIndex = 15;
+            this.label6.TabIndex = 5;
             this.label6.Text = "Timeout";
             // 
             // numericUpDownTimeout
@@ -299,7 +299,7 @@ namespace WebStressTool
             131072});
             this.numericUpDownTimeout.Name = "numericUpDownTimeout";
             this.numericUpDownTimeout.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownTimeout.TabIndex = 14;
+            this.numericUpDownTimeout.TabIndex = 6;
             this.numericUpDownTimeout.Value = new decimal(new int[] {
             15,
             0,
@@ -317,7 +317,7 @@ namespace WebStressTool
             this.comboBoxUrl.Name = "comboBoxUrl";
             this.comboBoxUrl.Size = new System.Drawing.Size(62, 21);
             this.comboBoxUrl.Sorted = true;
-            this.comboBoxUrl.TabIndex = 13;
+            this.comboBoxUrl.TabIndex = 2;
             this.comboBoxUrl.TextChanged += new System.EventHandler(this.ComboBoxUrlTextChanged);
             // 
             // buttonClear
@@ -325,7 +325,7 @@ namespace WebStressTool
             this.buttonClear.Location = new System.Drawing.Point(6, 233);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
-            this.buttonClear.TabIndex = 12;
+            this.buttonClear.TabIndex = 16;
             this.buttonClear.Text = "Clear";
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.ButtonClearClick);
@@ -335,7 +335,7 @@ namespace WebStressTool
             this.label5.Location = new System.Drawing.Point(6, 114);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(188, 20);
-            this.label5.TabIndex = 11;
+            this.label5.TabIndex = 9;
             this.label5.Text = "Threads";
             // 
             // label4
@@ -343,7 +343,7 @@ namespace WebStressTool
             this.label4.Location = new System.Drawing.Point(6, 189);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 20);
-            this.label4.TabIndex = 10;
+            this.label4.TabIndex = 14;
             this.label4.Text = "Inc";
             // 
             // label3
@@ -351,7 +351,7 @@ namespace WebStressTool
             this.label3.Location = new System.Drawing.Point(6, 163);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 20);
-            this.label3.TabIndex = 9;
+            this.label3.TabIndex = 12;
             this.label3.Text = "Max";
             // 
             // label2
@@ -359,7 +359,7 @@ namespace WebStressTool
             this.label2.Location = new System.Drawing.Point(6, 137);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 20);
-            this.label2.TabIndex = 8;
+            this.label2.TabIndex = 10;
             this.label2.Text = "Min";
             // 
             // label1
