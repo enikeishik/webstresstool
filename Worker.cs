@@ -76,6 +76,9 @@ namespace WebStressTool
             request.Timeout = requestTimeout;
             request.KeepAlive = false;
             request.ProtocolVersion = HttpVersion.Version10;
+            Uri uri = new Uri(url);
+            if (UriHostNameType.Dns == Uri.CheckHostName(uri.Host))
+                request.Host = uri.Host;
             
             HttpWebResponse response = null;
             try {
