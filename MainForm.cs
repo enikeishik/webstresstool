@@ -257,6 +257,7 @@ namespace WebStressTool
         void ButtonClearClick(object sender, EventArgs e)
         {
             textBoxResults.Text = "";
+            this.Text = formTitle;
         }
         
         void TextBoxUrlValidating(object sender, System.ComponentModel.CancelEventArgs e)
