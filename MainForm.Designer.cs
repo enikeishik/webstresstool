@@ -119,7 +119,7 @@ namespace WebStressTool
             // 
             this.numericUpDownIterates.Location = new System.Drawing.Point(74, 71);
             this.numericUpDownIterates.Maximum = new decimal(new int[] {
-            999,
+            100000,
             0,
             0,
             0});
@@ -132,7 +132,7 @@ namespace WebStressTool
             this.numericUpDownIterates.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownIterates.TabIndex = 8;
             this.numericUpDownIterates.Value = new decimal(new int[] {
-            10,
+            100,
             0,
             0,
             0});
@@ -141,7 +141,7 @@ namespace WebStressTool
             // 
             this.numericUpDownThreadsMin.Location = new System.Drawing.Point(74, 137);
             this.numericUpDownThreadsMin.Maximum = new decimal(new int[] {
-            999,
+            1000,
             0,
             0,
             0});
@@ -164,7 +164,7 @@ namespace WebStressTool
             // 
             this.numericUpDownThreadsMax.Location = new System.Drawing.Point(74, 163);
             this.numericUpDownThreadsMax.Maximum = new decimal(new int[] {
-            999,
+            1000,
             0,
             0,
             0});
@@ -288,7 +288,7 @@ namespace WebStressTool
             65536});
             this.numericUpDownTimeout.Location = new System.Drawing.Point(74, 45);
             this.numericUpDownTimeout.Maximum = new decimal(new int[] {
-            20,
+            600,
             0,
             0,
             0});
@@ -301,10 +301,10 @@ namespace WebStressTool
             this.numericUpDownTimeout.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownTimeout.TabIndex = 6;
             this.numericUpDownTimeout.Value = new decimal(new int[] {
-            15,
+            10,
             0,
             0,
-            65536});
+            0});
             // 
             // comboBoxUrl
             // 
